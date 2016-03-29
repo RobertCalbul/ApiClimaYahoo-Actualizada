@@ -42,7 +42,10 @@ namespace ClimaYahoo_Actualizado
             {
                 // double dolar = this.conv.ConversionRate(fromDolar, to);
                 //double euro = this.conv.ConversionRate(fromEuro, to);
-
+                String[] diasEng = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+                String[] diasEsp = { "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do" };
+                String[] mesEng = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+                String[] mesEsp = { "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
                 var woeid = "349871";
                 string results = "";
 
@@ -59,13 +62,37 @@ namespace ClimaYahoo_Actualizado
                 var images      = jo.query.results.channel.item.description;
                 var atmos       = jo.query.results.channel.atmosphere;
                 var astro       = jo.query.results.channel.astronomy;
+                var fore        = jo.query.results.channel.forecast;
                 var temperatura = items.temp;
                 var cuidad      = citys.city;
                 var pais        = citys.country;
 
                 int temp = (int)((double)temperatura - 32) * 5 / 9;
+                //Extraer fecha 
+                String day = items.date.ToString().Substring(0, items.date.ToString().IndexOf(':') - 3);
+                //convierte dias ingles a español
+                for (int i=0; i< diasEng.Length; i++) {
+                    if (day.IndexOf(diasEng[i]) > -1)
+                    {
+                        String auxday = day.Substring(0, 3);
+                        day = day.Replace(auxday, diasEsp[i]);
+                        //Console.WriteLine(">>" + day);
+                    }
+                  
+                }
+                //convierte meses ingles a español
+                String moth = day;
+                for (int i = 0; i < mesEng.Length; i++) {
+                    if (moth.IndexOf(mesEng[i]) > 0)
+                    {
+                        String auxmoth = moth.Substring(moth.IndexOf(mesEng[i]), 3);
+                        day = moth.Replace(auxmoth, mesEsp[i]);
+                        //Console.WriteLine(">>+"+day);
+                    }
 
-                this.lCity.Content = string.Format("{0}, {1}", cuidad, pais);
+                }
+
+                this.lCity.Content = string.Format("{0}, {1}  {2} ", cuidad, pais, day);
                 this.Label1.Content += string.Format("\nHumedad  {0} g/m3", atmos.humidity);
                 this.Label1.Content += string.Format("\nPresion Atmos.  {0} ", atmos.pressure);
                 this.Label2.Content += string.Format("\nAmanacer.  {0} ", astro.sunrise);

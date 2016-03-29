@@ -32,7 +32,7 @@
         </Grid.ColumnDefinitions>
         <Image Name="lImageTiempo" Grid.Column="1" Grid.Row="3"/>
         <Label Name="lTemperature" Content="7ªC" Grid.Column="2" Margin="0" Grid.Row="2" Grid.ColumnSpan="4" Grid.RowSpan="2" Foreground="White" FontSize="72"/>
-        <Label Name="lCity" Content="Ciudad" Grid.Column="1" Margin="0" Grid.Row="2" Foreground="White" FontSize="16"/>
+        <Label Name="lCity" Content="Ciudad" Grid.Column="1" Margin="0" Grid.Row="2" Foreground="White" FontSize="16" Grid.ColumnSpan="5"/>
         <Label Name="Label1" Content="DATOS ADICIONALES" Grid.Column="1" Margin="0" Grid.Row="4" Foreground="White"/>
         <Label x:Name="Label2" Content="" Grid.Column="3" Margin="0" Grid.Row="4" Foreground="White" Grid.ColumnSpan="3"/>
         <Label x:Name="lbl_cerrar" Content="X" Grid.Column="5" Margin="0" Grid.Row="1" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbl_cerrar_MouseDown"/>
